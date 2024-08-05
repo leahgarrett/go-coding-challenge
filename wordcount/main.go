@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"runtime/pprof"
 	"time"
 	"unicode"
 )
@@ -20,6 +21,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not open file %q: %v", os.Args[1], err)
 	}
+
+	fc, err := os.Create("cpuprofile.pprof")
+	if err != nil {
+		log.Fatal(err)
+	}
+	pprof.StartCPUProfile(fc)
+	defer pprof.StopCPUProfile()
 
 	start := time.Now()
 	words := 0

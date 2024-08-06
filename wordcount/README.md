@@ -21,3 +21,10 @@ For base branch:
 
 For this branch:
 `"shakespeare.txt": 378586 words, duration: 30136ms`
+
+Compare to word count:
+
+`time wc -w shakespeare.txt `  
+
+`378588 shakespeare.txt`    
+`wc -w shakespeare.txt  0.01s user 0.00s system 76% cpu 0.016 total`  

@@ -16,6 +16,9 @@ func readbyte(r io.Reader) (rune, error) {
 	return rune(buf[0]), err
 }
 
+// before adding buffering
+// "shakespeare.txt": 741200 words, duration: 2673868ms
+
 func main() {
 	f, err := os.Open(os.Args[1])
 	if err != nil {

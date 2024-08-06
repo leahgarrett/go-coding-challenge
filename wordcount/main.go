@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
@@ -15,9 +16,6 @@ func readbyte(r io.Reader) (rune, error) {
 	_, err := r.Read(buf[:])
 	return rune(buf[0]), err
 }
-
-// before adding buffering
-// "shakespeare.txt": 741200 words, duration: 2673868ms
 
 func main() {
 	f, err := os.Open(os.Args[1])
@@ -34,9 +32,10 @@ func main() {
 
 	start := time.Now()
 	words := 0
+	b := bufio.NewReader(f)
 	inword := false
 	for {
-		r, err := readbyte(f)
+		r, err := readbyte(b)
 		if err == io.EOF {
 			break
 		}

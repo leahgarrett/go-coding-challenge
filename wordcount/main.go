@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"log"
@@ -18,10 +17,10 @@ func readbyte(r io.Reader) (rune, error) {
 }
 
 func main() {
-	f, err := os.Open(os.Args[1])
-	if err != nil {
-		log.Fatalf("could not open file %q: %v", os.Args[1], err)
-	}
+	// f, err := os.Open(os.Args[1])
+	// if err != nil {
+	// 	log.Fatalf("could not open file %q: %v", os.Args[1], err)
+	// }
 
 	fc, err := os.Create("cpuprofile.pprof")
 	if err != nil {
@@ -32,16 +31,13 @@ func main() {
 
 	start := time.Now()
 	words := 0
-	b := bufio.NewReader(f)
+	// b := bufio.NewReader(f)
+	s, _ := os.ReadFile(os.Args[1])
+
 	inword := false
-	for {
-		r, err := readbyte(b)
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			log.Fatalf("could not read file %q: %v", os.Args[1], err)
-		}
+	for i := 0; i < len(s); i++ {
+		r := rune(s[i])
+
 		if unicode.IsSpace(r) && inword {
 			words++
 			inword = false

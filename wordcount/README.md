@@ -8,8 +8,8 @@ A simple timer has been used to track execution time.
 
 Provide the name of the text file as a command line argument.
 
-`go run main.go moby.txt`  
+`go run main.go sherlock.txt`  
 
 Example file to use:
-https://www.gutenberg.org/cache/epub/2701/pg2701.txt
+https://www.gutenberg.org/ebooks/100
 

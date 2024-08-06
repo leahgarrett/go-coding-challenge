@@ -29,20 +29,24 @@ func main() {
 	pprof.StartCPUProfile(fc)
 	defer pprof.StopCPUProfile()
 
+	s, _ := os.ReadFile(os.Args[1])
+
 	start := time.Now()
 	words := 0
 	// b := bufio.NewReader(f)
-	s, _ := os.ReadFile(os.Args[1])
 
 	inword := false
 	for i := 0; i < len(s); i++ {
 		r := rune(s[i])
 
-		if unicode.IsSpace(r) && inword {
-			words++
-			inword = false
+		if unicode.IsSpace(r) {
+			if inword {
+				words++
+				inword = false
+			}
+		} else {
+			inword = true
 		}
-		inword = unicode.IsLetter(r)
 	}
 	fmt.Printf("%q: %d words, duration: %dms\n", os.Args[1], words, time.Since(start)/1000)
 }

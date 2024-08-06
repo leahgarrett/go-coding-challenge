@@ -20,7 +20,7 @@ For base branch:
 `"shakespeare.txt": 741200 words, duration: 3422897ms`
 
 For this branch with buffering:
-`"shakespeare.txt": 741200 words, duration: 2744805ms`
+`"shakespeare.txt": 741200 words, duration: 97406ms`
 
 
 # To view profile

@@ -13,3 +13,7 @@ Provide the name of the text file as a command line argument.
 Example file to use:
 https://www.gutenberg.org/cache/epub/2701/pg2701.txt
 
+
+# To view profile
+
+`go tool pprof -http=:8080 cpuprofile.pprof`  

@@ -13,3 +13,13 @@ Provide the name of the text file as a command line argument.
 Example file to use:
 https://www.gutenberg.org/ebooks/100
 
+
+# Execution time
+
+For this branch:
+`"shakespeare.txt": 741200 words, duration: 3422897ms`
+
+
+# To view profile
+
+`go tool pprof -http=:8080 cpuprofile.pprof`  

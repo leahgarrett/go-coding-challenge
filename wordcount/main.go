@@ -11,8 +11,10 @@ import (
 	"unicode"
 )
 
+var buf [1]byte
+
 func readbyte(r io.Reader) (rune, error) {
-	var buf [1]byte
+
 	_, err := r.Read(buf[:])
 	return rune(buf[0]), err
 }

@@ -19,8 +19,11 @@ https://www.gutenberg.org/ebooks/100
 For base branch:
 `"shakespeare.txt": 741200 words, duration: 3422897ms`
 
-For this branch with buffering:
+For the profile branch with buffering:
 `"shakespeare.txt": 741200 words, duration: 97406ms`
+
+For this branch with global buffer:
+`"shakespeare.txt": 741200 words, duration: 67800ms`
 
 
 # To view profile

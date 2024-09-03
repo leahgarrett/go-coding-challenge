@@ -12,6 +12,10 @@ func BenchmarkCountWords(b *testing.B) {
 	countWords(bytes)
 }
 
+func BenchmarkFastestCountWords(b *testing.B) {
+	fastestCountWords("test_data.txt")
+}
+
 func BenchmarkByteCountWordsV2(b *testing.B) {
 	f, err := os.Open("test_data.txt")
 	if err != nil {

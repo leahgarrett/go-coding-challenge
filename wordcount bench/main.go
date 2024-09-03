@@ -27,6 +27,10 @@ func main() {
 	wordCount = byteCountWords(f)
 	fmt.Printf("byteCountWords: %d words, duration: %dns\n", wordCount, time.Since(start)/1000)
 
+	f, err = os.Open(os.Args[1])
+	if err != nil {
+		log.Fatalf("could not open file %q: %v", os.Args[1], err)
+	}
 	wordCount = byteCountWordsV2(f)
 	fmt.Printf("byteCountWordsV2: %d words, duration: %dns\n", wordCount, time.Since(start)/1000)
 

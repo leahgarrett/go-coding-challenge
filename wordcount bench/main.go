@@ -124,3 +124,39 @@ func byteCountWords(f *os.File) int {
 
 	return words
 }
+
+func fastWordCount(f *os.File) int {
+	const bufferSize = 32 * 1024 // 32 KB buffer
+	buffer := make([]byte, bufferSize)
+	words := 0
+	inword := false
+
+	for {
+		n, err := f.Read(buffer)
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("could not read file %q: %v", os.Args[1], err)
+		}
+
+		for i := 0; i < n; i++ {
+			r := rune(buffer[i])
+			if unicode.IsSpace(r) {
+				if inword {
+					words++
+					inword = false
+				}
+			} else {
+				inword = true
+			}
+		}
+	}
+
+	// If the last character was part of a word, count it
+	if inword {
+		words++
+	}
+
+	return words
+}

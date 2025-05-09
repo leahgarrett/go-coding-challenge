@@ -20,6 +20,13 @@ func main() {
 	fmt.Printf("countWords: %d words, duration: %dns\n", wordCount, time.Since(start)/1000)
 
 	start = time.Now()
+	wordCount, err := fastestCountWords(filePath)
+	if err != nil {
+		fmt.Printf("%d", err)
+	}
+	fmt.Printf("fastestCounWords: %d words, duration: %dns\n", wordCount, time.Since(start)/1000)
+
+	start = time.Now()
 	f, err := os.Open(os.Args[1])
 	if err != nil {
 		log.Fatalf("could not open file %q: %v", os.Args[1], err)
@@ -47,6 +54,29 @@ func ReadFile(filePath string) ([]byte, error) {
 		return nil, err
 	}
 	return bytes, nil
+}
+
+// Producing the most generalizable and fast word count
+func fastestCountWords(filePath string) (int, error) {
+	fd, err := os.Open(filePath)
+	if err != nil {
+		return 0, fmt.Errorf("could not open file %q: %v", filePath, err)
+	}
+	defer fd.Close()
+
+	words := 0
+	scanner := bufio.NewScanner(fd)
+	scanner.Split(bufio.ScanWords)
+
+	for scanner.Scan() {
+		words++
+	}
+
+	if err := scanner.Err(); err != nil {
+		return 0, fmt.Errorf("error reading file %q: %v", filePath, err)
+	}
+
+	return words, nil
 }
 
 func countWords(bytes []byte) int {
